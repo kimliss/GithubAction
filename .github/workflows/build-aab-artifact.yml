@@ -2,6 +2,8 @@ name: Deploy aab to artifact
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 't*'
 jobs:
@@ -15,11 +17,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v2
         with:
-          gradle-version: wrapper
-          cache-read-only: false
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: Build
         run: |
           chmod +x ./gradlew  
