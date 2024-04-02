@@ -34,3 +34,11 @@ jobs:
         with:
           name: App bundle(s) and APK(s) generated
           path: app/build/outputs/
+      - name: Gotify Notification
+        uses: eikendev/gotify-action@master
+        with:
+          gotify_api_base: '${{ secrets.gotify_api_base }}'
+          gotify_app_token: '${{ secrets.gotify_app_token }}'
+          notification_title: 'Build ${GITHUB_REF_NAME} #${GITHUB_RUN_NUMBER}'
+          notification_message: 'Commit: ${COMMIT_SHA_SHORT}\nStatus: ${{ job.status }}\nActor: ${{ github.actor }}\nBuild URL: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID'
+          notification_priority: 0
