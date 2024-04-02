@@ -1,11 +1,10 @@
 name: Deploy aab to artifact
 
 on:
+  pull_request:
   push:
     branches:
-      - main
-    tags:
-      - 't*'
+      - 'main'
 
 jobs:
   Gradle:
