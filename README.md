@@ -1,1 +1,1 @@
-has cache 2
+has cache 3
