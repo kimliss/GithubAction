@@ -1,1 +1,1 @@
-clear cache
+action cache 3
