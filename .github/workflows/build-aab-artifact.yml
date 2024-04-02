@@ -1,21 +1,14 @@
 name: Deploy aab to artifact
 
 on:
-  workflow_dispatch:
-    inputs:
-      public:
-        description: "any non-empty value triggers a public build - version not auto-incremented / changelog required"
-        required: false
-        type: string
   pull_request:
-  push:
+    types: [ closed ]
     branches:
       - 'main'
-    tags:
-      - 'v*'
 
 jobs:
   Gradle:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
