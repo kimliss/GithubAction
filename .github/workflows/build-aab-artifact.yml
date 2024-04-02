@@ -25,7 +25,7 @@ jobs:
       - name: Build
         run: |
           chmod +x ./gradlew  
-          ./gradlew build -x lint -x test --no-daemon
+          ./gradlew build -x lint -x test --no-daemon --build-cache
       - name: Sign Release
         run: |
           ./gradlew app:assembleRelease
